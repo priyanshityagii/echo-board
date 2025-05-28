@@ -6,10 +6,7 @@ import Homepage from "./components/Homepage";
 import AboutUs from "./components/AboutUs";
 import UserDashboard from "./components/UserDashboard";
 import AdminDashboard from "./components/AdminDashboard";
-
-
-
-
+import PrivateRoute from "./components/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
 
 
@@ -28,7 +25,16 @@ function App() {
 
          {/* Admin routes */}
         <Route path="/admin" element={<Login />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+        <Route
+  path="/admin/dashboard"
+  element={
+    <PrivateRoute>
+      <AdminDashboard />
+    </PrivateRoute>
+  }
+/>
+
       </Routes>
     </>
   );

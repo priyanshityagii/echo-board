@@ -1,4 +1,6 @@
 {
+  "dependencies": {
+    "react-router-dom": "^7.6.1"
   "name": "echo-board",
   "version": "1.0.0",
   "description": "Organizations and teams need a reliable and easy-to-use system to collect, store, and manage feedback from users or employees about products, services, or internal tools. In the absence of such a system, valuable insights often get lost or ignored, leading to missed opportunities for improvement.",

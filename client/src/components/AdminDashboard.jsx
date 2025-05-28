@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
+
+  const navigate = useNavigate();
   const [feedbacks, setFeedbacks] = useState([
     {
       _id: '1',
@@ -46,10 +48,16 @@ const AdminDashboard = () => {
     );
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");  // Clear token
+    navigate("/admin");                // Redirect to login
+  };
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-title-box">
         <h1 className="dashboard-title">Admin Dashboard</h1>
+        <button onClick={handleLogout} className="logout-button" >Logout</button>
       </div>
 
       {feedbacks.map((fb) => (

@@ -5,40 +5,58 @@ import logo from "../assets/images/logo2.png";
 import loginImage from "../assets/images/adminLogin2.png";
 import messageIcon from "../assets/icons/envelope.svg";
 import lockIcon from "../assets/icons/lock.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // Redirect if already logged in
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      window.location.href = "/admin/dashboard";
-    }
-  }, []);
+ useEffect(() => {
+  const token = localStorage.getItem("token");
+  console.log("Token on load:", token); // 👈 Debug
+  if (token) {
+    navigate("/admin/dashboard");
+  }
+}, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await axios.post("http://localhost:5000/admin/login", {
-        email,
-        password,
-      });
+  //   try {
+  //     const res = await axios.post("http://localhost:5000/admin/login", {
+  //       email,
+  //       password,
+  //     });
 
-      if (res.data.status) {
-        localStorage.setItem("token", res.data.token);
-        window.location.href = "/admin/dashboard";
-      } else {
-        alert(res.data.message || "Login failed");
-      }
-    } catch (error) {
-      alert("Server error. Please try again.");
-      console.error(error);
-    }
+  //     if (res.data.status) {
+  //       localStorage.setItem("token", res.data.token);
+  //       window.location.href = "/admin/dashboard";
+  //     } else {
+  //       alert(res.data.message || "Login failed");
+  //     }
+  //   } catch (error) {
+  //     alert("Server error. Please try again.");
+  //     console.error(error);
+  //   }
+  // };
+// Dummy credentials
+const dummyAdmin = {
+  email: "admin@example.com",
+  password: "admin123",
+};
+
+// Simulated login check
+if (email === dummyAdmin.email && password === dummyAdmin.password) {
+  localStorage.setItem("token", "dummy-token");
+  window.location.href = "/admin/dashboard";
+} else {
+  alert("Invalid credentials. Try 'admin@example.com' and 'admin123'");
+}
   };
 
+  
   return (
     <div className={styles.wrapper}>
       <div className={styles.logoContainer}>
